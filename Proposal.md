@@ -51,4 +51,9 @@ while giving each group member the opportunity to contribute independently to a 
 - Enhancements: Potentially have multiple difficulty levels or themes for replayability.
 
 #### Whack-a-Mole:
-
+- Game Board: 4x4 grid of holes where moles pop up randomly from
+- Gameplay: Click moles when they appear from the ground before they dissapear. Clicks that hit a mole will add a point and clicks that miss the mole will subtract a point.
+- Leaderboard: Track the player's score, highest mole combo, number of moles hit/total number of moles
+- Animations & Effects: Smooth mole animations where they pop out of and back in the holes, mouse is no an animated hammer than whacks the mole, SFX effects when hit/miss
+- Backend Integration: Node.js/Express backend with MongoDB to save scores, highest mole combo, and number of moles hit
+- Enhancements: Multiple difficulties where how long moles are up for is changed and mmulti-mole spawns. Possibly change grid size.
