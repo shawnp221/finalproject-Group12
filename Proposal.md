@@ -18,13 +18,13 @@ while giving each group member the opportunity to contribute independently to a 
 
 
 ### Technology/Libraries (maybe more depending on requirements for each game)
-HTML & CSS – For building accessible, visually appealing, and responsive static pages.
-JavaScript – To implement dynamic behavior, interactive gameplay, animations, and client-side logic for each mini-game.
-Node.js & Express – To handle server-side functionality, route requests, and manage communication between the client and database.
-MongoDB – To persistently store player scores, user accounts, and leaderboard data across sessions.
-Git & GitHub – For version control, collaborative coding, and deployment.
-Passport.js - For Github Authentication for login
-Three.js – To render 3D graphics and immersive game experiences for some mini-games, making the arcade visually engaging.
+- HTML & CSS – For building accessible, visually appealing, and responsive static pages.
+- JavaScript – To implement dynamic behavior, interactive gameplay, animations, and client-side logic for each mini-game.
+- Node.js & Express – To handle server-side functionality, route requests, and manage communication between the client and database.
+- MongoDB – To persistently store player scores, user accounts, and leaderboard data across sessions.
+- Git & GitHub – For version control, collaborative coding, and deployment.
+- Passport.js - For Github Authentication for login
+- Three.js – To render 3D graphics and immersive game experiences for some mini-games, making the arcade visually engaging.
 
 ### Our Games Include:
 
