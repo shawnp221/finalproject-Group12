@@ -24,6 +24,9 @@ while giving each group member the opportunity to contribute independently to a 
 
 #### Hangman:
 
+- Starts with a 1-minute timer. Pull from a list of random 5 - 10 letter words. The user guesses one letter at a time. For each mistake, some time is taken off of the timer. Once a word is found, the next word appears. When the timer is up, the final score (total words found) is stored in the database.
+- Visual effects, like frowny face when a mistake is made, and smiley face when a word is found.
+
 #### Memory Match:
 
 #### Whack-a-Mole:
