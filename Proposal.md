@@ -30,12 +30,12 @@ while giving each group member the opportunity to contribute independently to a 
 
 #### Minesweeper:
 
--Game Board: 5x5 area with 5 bombs all randomized
--Gameplay: click on a tile to reveal it. This will yield a number (1-4) indicating how many bombs are adjacent to that tile. If the tile is blank (no number) then all adjacent tiles are safe (no bomb).
--Leaderboard: a timer will begin on clicking start game. This, along with the number of tiles revealed, will be put in a leaderboard.
--Animations: there will be smooth and kinetic animations upon starting/ending the game and revealing tiles.
--Backend Integration: Node.js/Express backend with MongoDB to save each players time and score.
--Enhancements: Maybe sound effects or explosion when clicking on a bomb. Also maybe add the flagging capability of normal minesweeper.
+- Game Board: 5x5 area with 5 bombs all randomized
+- Gameplay: click on a tile to reveal it. This will yield a number (1-4) indicating how many bombs are adjacent to that tile. If the tile is blank (no number) then all adjacent tiles are safe (no bomb).
+- Leaderboard: a timer will begin on clicking start game. This, along with the number of tiles revealed, will be put in a leaderboard.
+- Animations: there will be smooth and kinetic animations upon starting/ending the game and revealing tiles.
+- Backend Integration: Node.js/Express backend with MongoDB to save each players time and score.
+- Enhancements: Maybe sound effects or explosion when clicking on a bomb. Also maybe add the flagging capability of normal minesweeper.
 
 #### Hangman:
 
