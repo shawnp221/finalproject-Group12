@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arcade Login</title>
+    <link rel="stylesheet" href="/login.css">
+</head>
+<body>
+<!-- Starfield Background -->
+<div class="stars" id="stars"></div>
+
+<!-- Arcade Machine -->
+<div class="arcade-machine">
+    <!-- Machine Top -->
+    <div class="machine-top">
+        <div class="machine-title">🕹️ ARCADE 🕹️</div>
+    </div>
+
+    <!-- Machine Body -->
+    <div class="machine-body">
+        <!-- Screen -->
+        <div class="screen-bezel">
+            <div class="screen">
+                <div class="login-content">
+                    <div class="login-title">PLAYER LOGIN</div>
+                    <div class="login-subtitle">Ready Player One?</div>
+                    <button class="github-button" onclick="handleGitHubLogin()">
+                        <span class="github-icon">🐙</span>
+                        <span>Login with GitHub</span>
+                    </button>
+
+                    <div class="insert-coin">▼ INSERT COIN TO START ▼</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel">
+            <div class="joystick">
+                <div class="joystick-base">
+                    <div class="joystick-stick"></div>
+                    <div class="joystick-ball"></div>
+                </div>
+            </div>
+            <div class="buttons-row">
+                <div class="arcade-button button-red" onclick="buttonPress(this)"></div>
+                <div class="arcade-button button-blue" onclick="buttonPress(this)"></div>
+                <div class="arcade-button button-green" onclick="buttonPress(this)"></div>
+                <div class="arcade-button button-yellow" onclick="buttonPress(this)"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Machine Base -->
+    <div class="machine-base">
+        <div class="coin-slot"></div>
+    </div>
+</div>
+
+<script>
+    // Create starfield
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // GitHub login handler (placeholder)
+    function handleGitHubLogin() {
+        const button = document.querySelector('.github-button');
+
+        // Add visual feedback (animation reset)
+        button.style.animation = 'none';
+        setTimeout(() => {
+            button.style.animation = '';
+        }, 10);
+
+        // Redirect to your GitHub OAuth route
+        window.location.href = '/auth/github';
+    }
+
+    // Button press effect
+    function buttonPress(button) {
+        button.style.transform = 'translateY(3px)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 100);
+    }
+
+    // Easter egg: Konami code
+    let konamiCode = [];
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+
+    document.addEventListener('keydown', (e) => {
+        konamiCode.push(e.key);
+        konamiCode = konamiCode.slice(-10);
+
+        if (konamiCode.join(',') === konamiSequence.join(',')) {
+            document.querySelector('.machine-body').style.animation = 'shake 0.5s';
+            setTimeout(() => {
+                alert('🎉 KONAMI CODE ACTIVATED! 🎉\n\n+30 Lives!\n+Unlimited Continues!');
+                document.querySelector('.machine-body').style.animation = '';
+            }, 500);
+        }
+    });
+
+    // Shake animation
+    const style = document.createElement('style');
+    style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(-50%) rotate(0deg); }
+                25% { transform: translateX(-50%) rotate(-2deg); }
+                75% { transform: translateX(-50%) rotate(2deg); }
+            }
+        `;
+    document.head.appendChild(style);
+
+    // Initialize
+    createStars();
+</script>
+</body>
+</html>

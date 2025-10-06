@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Arcade</title>
+    <link rel="stylesheet" href="/index.css">
+</head>
+<body>
+<!-- Starfield Background -->
+<div class="stars" id="stars"></div>
+
+<div class="container">
+    <header>
+        <h1>🕹️ RETRO ARCADE 🕹️</h1>
+        <p class="subtitle">INSERT COIN TO CONTINUE</p>
+    </header>
+
+    <div class="arcade-path">
+        <!-- Animated Path Line -->
+        <svg class="path-line" viewBox="0 0 1200 100" preserveAspectRatio="none">
+            <path class="animated-path" d="M 50 50 Q 300 10, 400 50 T 800 50 Q 1000 80, 1150 50" />
+        </svg>
+
+        <!-- Game Station 1 -->
+        <div class="game-station">
+            <div class="game-card">
+                <div class="station-number">1</div>
+                <span class="game-icon">💣</span>
+                <h3 class="game-title">MINESWEEPER</h3>
+                <p class="game-description">Clear the field without hitting any mines!</p>
+                <button class="play-button" onclick="launchGame(1)">PLAY NOW</button>
+            </div>
+        </div>
+
+        <!-- Game Station 2 -->
+        <div class="game-station">
+            <div class="game-card">
+                <div class="station-number">2</div>
+                <span class="game-icon">🎭</span>
+                <h3 class="game-title">HANGMAN</h3>
+                <p class="game-description">Find words before the timer runs out!</p>
+                <button class="play-button" onclick="launchGame(2)">PLAY NOW</button>
+            </div>
+        </div>
+
+        <!-- Game Station 3 -->
+        <div class="game-station">
+            <div class="game-card">
+                <div class="station-number">3</div>
+                <span class="game-icon">🃏</span>
+                <h3 class="game-title">MEMORY MATCH</h3>
+                <p class="game-description">Find all matching pairs to win the game!</p>
+                <button class="play-button" onclick="launchGame('/games/memorymatch')">PLAY NOW</button>
+            </div>
+        </div>
+
+        <!-- Game Station 4 -->
+        <div class="game-station">
+            <div class="game-card">
+                <div class="station-number">4</div>
+                <span class="game-icon">🔨</span>
+                <h3 class="game-title">WHACK-A-MOLE</h3>
+                <p class="game-description">Hit the moles as fast as you can!</p>
+                <button class="play-button" onclick="launchGame(4)">PLAY NOW</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="credits">💰 CREDITS: UNLIMITED 💰</p>
+        <p>Press any game button to start your adventure!</p>
+    </footer>
+</div>
+
+<!-- Coin Slot Indicator -->
+<div class="coin-slot">
+    INSERT COIN<br>▼
+</div>
+
+<script>
+    // Create starfield
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Launch game function
+    function launchGame(game){
+        const card = event.target.closest('.game-card');
+        card.style.animation = 'spin 0.5s ease';
+        setTimeout(() => {
+            window.location.href=game;
+            card.style.animation = '';
+        }, 500);
+    }
+
+    // Initialize
+    createStars();
+
+    // Add floating animation to game cards
+    document.querySelectorAll('.game-card').forEach((card, index) => {
+        card.style.animation = `bounce 2s infinite ${index * 0.2}s`;
+    });
+</script>
+</body>
+</html>
