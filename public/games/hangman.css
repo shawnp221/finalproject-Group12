@@ -1,0 +1,174 @@
+/* Import the retro font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* --- Base Styles & Retro Background --- */
+body {
+    /* Set the retro font for the entire game */
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    text-align: center;
+    overflow: hidden; /* Hide scrollbars */
+
+    /* Starry night background */
+    background-color: #0c0a1f; /* Dark navy blue */
+    background-image:
+        radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px),
+        radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+    animation: move-stars 200s linear infinite;
+}
+
+@keyframes move-stars {
+    from { background-position: 0 0, 40px 60px, 130px 270px, 70px 100px; }
+    to   { background-position: -10000px 5000px, -10000px 5000px, -10000px 5000px, -10000px 5000px; }
+}
+
+
+/* --- Game Container & Modal Styling --- */
+.game-container {
+    padding: 30px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    /* Semi-transparent background with a glass-like effect */
+    background: rgba(12, 10, 31, 0.6);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    border: 2px solid;
+    /* Create a multi-layered neon glow effect */
+    border-image: linear-gradient(45deg, #6c5ce7, #fd79a8) 1;
+    box-shadow:
+        0 0 5px rgba(108, 92, 231, 0.8),
+        0 0 10px rgba(108, 92, 231, 0.6),
+        0 0 15px rgba(253, 121, 168, 0.6),
+        0 0 20px rgba(253, 121, 168, 0.4),
+        inset 0 0 15px rgba(108, 92, 231, 0.5);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    /* Neon green text with a glowing shadow */
+    color: #00ffab;
+    text-shadow:
+        /* 0 0 5px #00ffab, */
+        0 0 10px #00ffab,
+        0 0 20px #00ffab;
+}
+
+/* --- Stats, Word Display, and Messages --- */
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+#word-display {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+    min-height: 50px;
+}
+
+.letter-box {
+    width: 45px;
+    height: 45px;
+    border-bottom: 4px solid #a29bfe;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: #fff;
+}
+
+#incorrect-guesses-container {
+    margin-top: 20px;
+    min-height: 60px;
+}
+
+#incorrect-letters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.incorrect-letter {
+    color: #ff7675;
+    font-size: 1.5rem;
+}
+
+#message-container {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    min-height: 25px;
+    color: #00ffab;
+}
+
+
+/* --- Game Over Modal --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: rgba(12, 10, 31, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #6c5ce7, #fd79a8) 1;
+    box-shadow:
+        0 0 10px rgba(108, 92, 231, 0.8),
+        0 0 20px rgba(253, 121, 168, 0.6);
+}
+
+.modal-content h2 {
+    font-size: 2.5rem;
+    color: #ff7675; /* Red 'Game Over' text */
+     text-shadow:
+        0 0 5px #ff7675,
+        0 0 10px #ff7675;
+}
+
+#restart-button {
+    font-family: 'Press Start 2P', cursive;
+    background-color: transparent;
+    border: 2px solid #a29bfe;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 5px #a29bfe;
+}
+
+#restart-button:hover {
+    background-color: #6c5ce7;
+    color: #fff;
+    box-shadow:
+        0 0 10px #6c5ce7,
+        0 0 20px #a29bfe;
+}
+
