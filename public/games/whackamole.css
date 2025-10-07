@@ -23,6 +23,20 @@ body {
     background: var(--bg);
     color: var(--hud);
     font-family: sans-serif;
+
+    background-color: #1b155a;
+
+    /* Animated hammer background */
+      background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg transform='rotate(44 32 32)' fill='rgba(0,0,0,0.22)'%3E%3Crect x='30' y='8' width='26' height='12' rx='3'/%3E%3Crect x='38' y='18' width='10' height='38' rx='3'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.25) 100%);
+  background-size: 180px, 100%;
+  background-repeat: repeat, no-repeat;
+  animation: move-hammers 140s linear infinite;
+}
+@keyframes move-hammers {
+  from { background-position: 0 0, 0 0, center; }
+  to { background-position: 1000px 1000px, 0 0, center; }
 }
 
 .game {

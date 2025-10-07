@@ -1,6 +1,6 @@
 // ----- Game config -----
 const GRID = 4;                  // 4x4
-const GAME_SECONDS = 3;         // 15 seconds
+const GAME_SECONDS = 15;         // 15 seconds
 const POP_INTERVAL_MIN = 650;    // ms between spawns
 const POP_INTERVAL_MAX = 1100;
 const MOLE_UP_MIN = 700;         // how long a mole stays up (ms)
@@ -194,7 +194,7 @@ lbBtn.addEventListener('click', async () => {
 });
 lbCloseBtn.addEventListener('click', closeLeaderboard);
 lbModal.addEventListener('click', (e) => {
-  if (e.target === lbModal) closeLeaderboard(); // click backdrop to close
+  if (e.target === lbModal) closeLeaderboard();
 });
 
 function closeLeaderboard() {
@@ -216,7 +216,6 @@ async function showLeaderboardModal() {
       if (meRes.ok) currentUser = await meRes.json();
     } catch (_) {}
 
-    // fetch whack-a-mole leaderboard
     const res = await fetch('/api/whackamole/data');
     const scores = await res.json();
 
@@ -262,11 +261,9 @@ async function showLeaderboardModal() {
   }
 }
 
-
 function saveScoreEntry(value) {
   const list = loadScores();
   const ts = new Date();
-  // store { value, ts } only (no name)
   list.unshift({ value, ts: ts.toISOString() });
   localStorage.setItem('wamLeaderboard', JSON.stringify(list.slice(0, 20)));
   renderScores();
@@ -282,7 +279,6 @@ function renderScores() {
   });
 }
 
-// Init
 updateScore(0);
 updateTimer();
 renderScores();
