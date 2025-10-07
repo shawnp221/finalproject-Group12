@@ -80,6 +80,7 @@ function flipCard(index) {
     }
 }
 
+
 function checkMatch() {
     const [card1, card2] = flippedCards;
 
@@ -291,6 +292,32 @@ function closeRulesModal() {
 
 function closeLeaderboard() {
     document.getElementById('leaderboardModal').classList.remove('show');
+}
+
+// Press Q to flip and un-flip cards (dev cheats)
+document.addEventListener('keydown', (event) => {
+    if (event.key.toLowerCase() === 'q') {
+        toggleAllCards();
+    }
+});
+
+let allFlipped = false;
+
+function toggleAllCards() {
+    const cards = document.querySelectorAll('.card');
+    allFlipped = !allFlipped;
+
+    cards.forEach(card => {
+        if (allFlipped) {
+            card.classList.add('flipped'); // show all
+        } else {
+            if (!card.classList.contains('matched')) {
+                card.classList.remove('flipped'); // hide again unless matched
+            }
+        }
+    });
+
+    console.log(`All cards ${allFlipped ? 'flipped' : 'reset'}`);
 }
 
 // Initialize game on load
