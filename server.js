@@ -117,6 +117,22 @@ app.get('/games/memorymatch', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'games', 'memorymatch.html'));
 });
 
+app.get('/games/minesweeper', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'minesweeper.html'));
+});
+
+
+app.get('/games/hangman', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'hangman.html'));
+});
+
+app.get('/games/whackamole', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'whackamole.html'));
+});
+
 // Example POST route
 app.post('/data', (req, res) => {
     const data = req.body;
@@ -165,6 +181,41 @@ async function run() {
             try {
                 const { username } = req.query;
                 const query = { game: "MemoryMatch" };
+                if (username) query.username = username;
+
+                // Fetch top 100 scores sorted by moves (asc) then time (asc)
+                const scores = await scoreCollection
+                    .find(query)
+                    .sort({ moves: 1, time: 1 })
+                    .limit(100)
+                    .toArray();
+                res.json(scores);
+            } catch (err) {
+                console.error("Error fetching scores:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
+
+        app.post('/api/hangman/score', async (req, res) => {
+            try {
+                const { username, score, game, date } = req.body;
+
+                if (!username || !score || !game) {
+                    return res.status(400).json({ error: "Missing fields" });
+                }
+
+                await scoreCollection.insertOne({ username, score, game, date });
+                res.json({ success: true });
+            } catch (err) {
+                console.error("Error saving score:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
+
+        app.get('/api/hangman/data', async (req, res) => {
+            try {
+                const { username } = req.query;
+                const query = { game: "Hangman" };
                 if (username) query.username = username;
 
                 // Fetch top 100 scores sorted by moves (asc) then time (asc)
