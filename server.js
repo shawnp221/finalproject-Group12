@@ -195,6 +195,40 @@ async function run() {
                 res.status(500).json({ error: "Server error" });
             }
         });
+        app.post('/api/minesweeper/score', async (req, res) => {
+            try {
+                const { username, time, game, date } = req.body;
+
+                if (!username || !time || !game) {
+                    return res.status(400).json({ error: "Missing fields" });
+                }
+
+                await scoreCollection.insertOne({ username, time, game, date });
+                res.json({ success: true });
+            } catch (err) {
+                console.error("Error saving score:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
+
+        app.get('/api/minesweeper/data', async (req, res) => {
+            try {
+                const { username } = req.query;
+                const query = { game: "Minesweeper" };
+                if (username) query.username = username;
+
+                // Fetch top 100 scores sorted by moves (asc) then time (asc)
+                const scores = await scoreCollection
+                    .find(query)
+                    .sort({ moves: 1, time: 1 })
+                    .limit(100)
+                    .toArray();
+                res.json(scores);
+            } catch (err) {
+                console.error("Error fetching scores:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
 
 
 
