@@ -117,6 +117,22 @@ app.get('/games/memorymatch', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'games', 'memorymatch.html'));
 });
 
+app.get('/games/minesweeper', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'minesweeper.html'));
+});
+
+
+app.get('/games/hangman', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'hangman.html'));
+});
+
+app.get('/games/whackamole', ensureAuthenticated, (req, res) => {
+    // res.send('Hello from Express server!');
+    res.sendFile(path.join(__dirname, 'public', 'games', 'whackamole.html'));
+});
+
 // Example POST route
 app.post('/data', (req, res) => {
     const data = req.body;
