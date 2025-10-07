@@ -172,3 +172,84 @@ h1 {
         0 0 20px #a29bfe;
 }
 
+/* This is the main container for your buttons */
+.controls {
+    display: flex; /* Aligns buttons in a row */
+    justify-content: center; /* Centers the buttons horizontally */
+    gap: 15px; /* Adds space between the buttons */
+    margin-top: 25px; /* Adds space above the controls section */
+    flex-wrap: wrap; /* Allows buttons to wrap onto the next line on smaller screens */
+}
+
+/* Base styling for all buttons */
+.btn {
+    font-family: 'Press Start 2P', cursive; /* Uses the retro font */
+    font-size: 14px;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000; /* Creates a pixelated shadow effect */
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    transform: translate(0, 0); /* Initial position */
+}
+
+/* Style for the primary action button (New Game) */
+.btn-primary {
+    background-color: #4CAF50; /* A classic green */
+}
+
+/* Style for the leaderboard button */
+.btn-leaderboard {
+    background-color: #ffc107; /* A golden yellow for the trophy */
+    color: #000;
+}
+
+/* Style for the secondary action button (How to Play) */
+.btn-secondary {
+    background-color: #2196F3; /* A nice blue */
+}
+
+/* This creates the "pressed" effect when you hover or click */
+.btn:hover {
+    transform: translate(2px, 2px); /* Moves the button slightly */
+    box-shadow: 2px 2px 0 #000; /* Reduces the shadow to enhance the effect */
+}
+
+.btn:active {
+    transform: translate(4px, 4px); /* Moves it further on click */
+    box-shadow: none; /* Removes the shadow completely */
+}
+
+.leaderboard-table {
+    width: 100%; /* Makes the table take up the full width of its container */
+    margin-top: 20px; /* Adds some space above the table */
+    border-collapse: collapse; /* Removes the space between table cell borders */
+}
+
+/* Styles for the table header (th) and data cells (td) */
+.leaderboard-table th,
+.leaderboard-table td {
+    text-align: center; /* This is the key change to center the text */
+    padding: 10px; /* Adds some comfortable spacing inside each cell */
+    border-bottom: 1px solid #4a4a4a; /* Adds a subtle line between rows */
+}
+
+/* Style for the header row to make it stand out */
+.leaderboard-table th {
+    color: #ffc107; /* A golden color to match the trophy icon */
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+/* Style to highlight the current user's score */
+.current-user {
+    background-color: rgba(255, 255, 255, 0.1); /* A subtle highlight */
+    font-weight: bold;
+}
+
+/* Style for the medals to make sure they align nicely */
+.rank-medal {
+    margin-right: 8px; /* Adds a little space between the medal and the rank number */
+}
