@@ -217,10 +217,10 @@ async function run() {
                 const query = { game: "Minesweeper" };
                 if (username) query.username = username;
 
-                // Fetch top 100 scores sorted by moves (asc) then time (asc)
+                // Fetch top 100 scores sorted by time (asc)
                 const scores = await scoreCollection
                     .find(query)
-                    .sort({ moves: 1, time: 1 })
+                    .sort({ time: 1 })
                     .limit(100)
                     .toArray();
                 res.json(scores);
