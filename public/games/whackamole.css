@@ -1,0 +1,125 @@
+:root {
+      --bg: #0c0f14;
+      --panel: #1b2230; /* UI panels */
+      --grass: #2f7d32; /* board grass */
+      --grass2: #256628; /* darker stripes */
+      --hole: #1e4a22; /* darker patch for each hole */
+      --mole: #c96a2c; /* simple mole block color */
+      --hud: #e8eef9;
+      --accent: #7bc96f;
+      --danger: #e15555;
+      /* Optional sprite. Set to url('./mole.png') to use an image. */
+      --mole-img: none;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: var(--bg);
+      color: var(--hud);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    .game {
+      display: grid;
+      gap: 14px 18px;
+      width: min(92vw, 1000px);
+      grid-template-columns: 1fr 280px; /* left: HUD + board, right: leaderboard */
+      align-items: start;
+    }
+
+    .hud {
+      grid-column: 1 / 2; /* top-left */
+      display: grid;
+      grid-template-columns: 1fr auto auto auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      background: var(--panel);
+      border-radius: 10px;
+      font-weight: 600;
+    }
+
+    button {
+      background: var(--accent);
+      color: #08130a;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.6; cursor: not-allowed; }
+    .danger { background: var(--danger); color: #fff; }
+
+    /* Board */
+    #board {
+      grid-column: 1 / 2; /* below HUD */
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, var(--grass), var(--grass2));
+      border-radius: 16px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 14px;
+      user-select: none;
+      position: relative;
+    }
+
+    .hole {
+      background: var(--hole);
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden; /* hide the mole when down */
+    }
+
+    /* Mole: basic block with optional sprite; no dirt cylinder */
+    .mole {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -72%; /* hidden below the hole */
+      height: 80%;
+      background: var(--mole);
+      border-radius: 14px 14px 0 0;
+      box-shadow: inset 0 0 0 4px rgba(0,0,0,0.15);
+      transition: bottom 160ms ease; /* simple up/down animation */
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      color: #2b0f05;
+      background-image: var(--mole-img);
+      background-repeat: no-repeat;
+      background-position: center bottom;
+      background-size: contain;
+    }
+
+    .mole.up { bottom: 0%; }
+
+    .footer-note { opacity: 0.6; font-size: 12px; text-align: center; grid-column: 1 / -1; }
+
+    /* Right panel (Leaderboard) */
+    .sidebar {
+      grid-column: 2; /* right side */
+      grid-row: 1 / span 2; /* next to HUD & board */
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+      min-height: 320px;
+    }
+    .sidebar h3 { margin: 0; font-size: 18px; }
+    #scores { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    #scores li { background: #202a3b; padding: 8px 10px; border-radius: 8px; font-size: 13px; }
+    #clearScores { background: var(--danger); color: #fff; border: none; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
+    .name-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
+    .name-form input { padding: 8px 10px; border-radius: 8px; border: none; background: #202a3b; color: var(--hud); }
+    .name-form button { background: var(--accent); color: #08130a; border: none; border-radius: 8px; padding: 8px 12px; font-weight: 700; cursor: pointer; }
