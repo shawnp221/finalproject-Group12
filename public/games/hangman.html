@@ -27,6 +27,12 @@
         <div id="message-container">
             <p>Loading words...</p>
         </div>
+
+        <div class="controls">
+            <button class="btn btn-primary" id="new-game-btn">New Game</button>
+            <button id="leaderboard-btn" class="btn btn-leaderboard"> 🏆 Leaderboard</button>
+            <button id="rules-btn" class="btn btn-secondary">How to Play</button>
+        </div>
     </div>
 
     <div id="game-over-modal" class="modal">
@@ -34,6 +40,28 @@
             <h2>GAME OVER</h2>
             <p>Final Score: <span id="final-score">0</span></p>
             <button id="restart-button">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div class="modal" id="leaderboardModal">
+        <div class="modal-content">
+            <h2>🏆 Leaderboard 🏆</h2>
+            <div id="leaderboardContent">Loading...</div>
+            <button class="btn btn-primary" onclick="closeLeaderboard()">Close</button>
+        </div>
+    </div>
+
+    <div class="modal" id="rules-modal">
+        <div class="modal-content">
+            <h2>How to Play</h2>
+            <ul class="rules-list">
+                <li>Guess the word one letter at a time using your keyboard.</li>
+                <li>You have <strong>2 minutes</strong> to guess as many words as possible.</li>
+                <li>Each correct word increases your score by 1.</li>
+                <li>Each incorrect letter guess will cost you <strong>3 seconds</strong>!</li>
+            </ul>
+            <button id="close-rules-btn" class="btn btn-primary">Got It!</button>
         </div>
     </div>
 
