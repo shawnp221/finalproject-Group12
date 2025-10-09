@@ -10,7 +10,6 @@ const app = express();
 const PORT = process.env.PORT || 3000; // Use environment port or default to 3000
 
 
-
 // Middleware to parse JSON request bodies
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'login'))); // serve 'public' folder
@@ -38,7 +37,7 @@ passport.use(new GitHubStrategy({
         clientID: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
         // callbackURL: "http://localhost:3000/auth/github/callback"
-        callbackURL: "http://localhost:3000/auth/github/callback"
+        callbackURL: process.env.CALLBACK_URL || "http://localhost:3000/auth/github/callback"
     },
     async (accessToken, refreshToken, profile, done) => {
         try {
