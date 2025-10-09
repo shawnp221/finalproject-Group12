@@ -194,6 +194,40 @@ async function run() {
                 res.status(500).json({ error: "Server error" });
             }
         });
+        app.post('/api/minesweeper/score', async (req, res) => {
+            try {
+                const { username, time, game, date } = req.body;
+
+                if (!username || !time || !game) {
+                    return res.status(400).json({ error: "Missing fields" });
+                }
+
+                await scoreCollection.insertOne({ username, time, game, date });
+                res.json({ success: true });
+            } catch (err) {
+                console.error("Error saving score:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
+
+        app.get('/api/minesweeper/data', async (req, res) => {
+            try {
+                const { username } = req.query;
+                const query = { game: "Minesweeper" };
+                if (username) query.username = username;
+
+                // Fetch top 100 scores sorted by time (asc)
+                const scores = await scoreCollection
+                    .find(query)
+                    .sort({ time: 1 })
+                    .limit(100)
+                    .toArray();
+                res.json(scores);
+            } catch (err) {
+                console.error("Error fetching scores:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
 
         app.post('/api/hangman/score', async (req, res) => {
             try {
@@ -230,8 +264,40 @@ async function run() {
             }
         });
 
+        app.post('/api/whackamole/score', async (req, res) => {
+            try {
+                const { username, score, game, date } = req.body;
 
+                if (!username || !score || !game) {
+                    return res.status(400).json({ error: "Missing fields" });
+                }
 
+                await scoreCollection.insertOne({ username, score, game, date });
+                res.json({ success: true });
+            } catch (err) {
+                console.error("Error saving score:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
+
+        app.get('/api/whackamole/data', async (req, res) => {
+            try {
+                const { username } = req.query;
+                const query = { game: "WhackAMole" };
+                if (username) query.username = username;
+
+                // Fetch top 100 scores sorted by moves (asc) then time (asc)
+                const scores = await scoreCollection
+                    .find(query)
+                    .sort({ score: -1, date: 1 })
+                    .limit(100)
+                    .toArray();
+                res.json(scores);
+            } catch (err) {
+                console.error("Error fetching scores:", err);
+                res.status(500).json({ error: "Server error" });
+            }
+        });
 
 
     } catch (err) {

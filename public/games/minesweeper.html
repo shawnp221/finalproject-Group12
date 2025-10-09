@@ -44,16 +44,26 @@
 
     <div class="board-wrap">
       <div id="board" class="board" role="grid" aria-label="minesweeper board"></div>
+      <div id="explosion">💥</div>
     </div>
 
     <div class="message" id="msg"></div>
 
     <div class="leaderboard" style="margin-top:20px;">
-      <h2>Leaderboard</h2>
-      <ol id="leaderboardList"></ol>
+      <button onclick="showLeaderboard()">Show Leaderboard</button>
     </div>
 
     <div class="footer">Tip: Each box in the grid can only see the adjacent 8 boxes.</div>
+  </div>
+
+  <div id="leaderboardModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <h2>Leaderboard</h2>
+      <div id="leaderboardContent"></div>
+      <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end;">
+        <button id="closeLeaderboardBtn">Close</button>
+      </div>
+    </div>
   </div>
   
   <script src="minesweeper.js"></script>

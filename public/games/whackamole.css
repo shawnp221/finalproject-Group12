@@ -1,125 +1,225 @@
 :root {
-      --bg: #0c0f14;
-      --panel: #1b2230; /* UI panels */
-      --grass: #2f7d32; /* board grass */
-      --grass2: #256628; /* darker stripes */
-      --hole: #1e4a22; /* darker patch for each hole */
-      --mole: #c96a2c; /* simple mole block color */
-      --hud: #e8eef9;
-      --accent: #7bc96f;
-      --danger: #e15555;
-      /* Optional sprite. Set to url('./mole.png') to use an image. */
-      --mole-img: none;
+    --bg: #0c0f14;
+    --panel: #1b2230;
+    /* UI panels */
+    --grass: #2f7d32;
+    /* board grass */
+    --grass2: #256628;
+    /* darker stripes */
+    --hole: #1e4a22;
+    /* darker patch for each hole */
+    --mole: #c96a2c;
+    /* simple mole block color */
+    --hud: #e8eef9;
+    --accent: #7bc96f;
+    --danger: #e15555;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    background: var(--bg);
+    color: var(--hud);
+    font-family: sans-serif;
+
+    background-color: #1b155a;
+
+    /* Animated hammer background */
+      background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg transform='rotate(44 32 32)' fill='rgba(0,0,0,0.22)'%3E%3Crect x='30' y='8' width='26' height='12' rx='3'/%3E%3Crect x='38' y='18' width='10' height='38' rx='3'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.25) 100%);
+  background-size: 180px, 100%;
+  background-repeat: repeat, no-repeat;
+  animation: move-hammers 140s linear infinite;
+}
+@keyframes move-hammers {
+  from { background-position: 0 0, 0 0, center; }
+  to { background-position: 1000px 1000px, 0 0, center; }
+}
+
+.game {
+    display: grid;
+    gap: 14px 18px;
+    width: min(92vw, 720px);
+    /* narrower since no right panel */
+    grid-template-columns: 1fr;
+    /* single column */
+    justify-items: center;
+    /* center children (HUD + board) */
+    align-items: start;
+    margin: 0 auto;
+    /* horizontally center container */
+}
+
+.hud {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge {
+    padding: 8px 12px;
+    background: var(--panel);
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+button {
+    background: var(--accent);
+    color: #08130a;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.danger {
+    background: var(--danger);
+    color: #fff;
+}
+
+#board {
+    grid-column: 1 / -1;
+    aspect-ratio: 1 / 1;
+    background: linear-gradient(135deg, var(--grass), var(--grass2));
+    border-radius: 16px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 14px;
+    user-select: none;
+    position: relative;
+    width: 100%;
+}
+
+.hole {
+    background: var(--hole);
+    border-radius: 14px;
+    position: relative;
+    overflow: hidden;
+    /* hide the mole when down */
+}
+
+.mole {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -72%;
+    /* hide mole below the hole */
+    height: 80%;
+    background: var(--mole);
+    border-radius: 14px 14px 0 0;
+    box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.15);
+    transition: bottom 160ms ease;
+    /* Transition moles up/down animation */
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    color: #2b0f05;
+
+    background-image: var(--mole-img);
+    /* Render mole img */
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-size: contain;
+}
+
+.mole.up {
+    bottom: 0%;
+}
+
+.footer-note {
+    opacity: 0.6;
+    font-size: 12px;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--panel);
+    color: var(--hud);
+    padding: 24px;
+    border-radius: 16px;
+    width: min(92vw, 640px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: modalPop 0.22s ease;
+}
+
+.modal-content h2 {
+    margin: 0 0 12px 0;
+    text-align: center;
+    font-size: 20px;
+}
+
+.modal .btn {
+    margin-top: 14px;
+    background: var(--accent);
+    color: #08130a;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+@keyframes modalPop {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
     }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: var(--bg);
-      color: var(--hud);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    to {
+        transform: scale(1.0);
+        opacity: 1;
     }
+}
 
-    .game {
-      display: grid;
-      gap: 14px 18px;
-      width: min(92vw, 1000px);
-      grid-template-columns: 1fr 280px; /* left: HUD + board, right: leaderboard */
-      align-items: start;
-    }
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #202a3b;
+    border-radius: 12px;
+    overflow: hidden;
+    font-size: 14px;
+}
 
-    .hud {
-      grid-column: 1 / 2; /* top-left */
-      display: grid;
-      grid-template-columns: 1fr auto auto auto;
-      gap: 10px;
-      align-items: center;
-    }
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 10px 12px;
+    text-align: left;
+}
 
-    .badge {
-      padding: 8px 12px;
-      background: var(--panel);
-      border-radius: 10px;
-      font-weight: 600;
-    }
+.leaderboard-table thead {
+    background: #253149;
+}
 
-    button {
-      background: var(--accent);
-      color: #08130a;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    button:disabled { opacity: 0.6; cursor: not-allowed; }
-    .danger { background: var(--danger); color: #fff; }
-
-    /* Board */
-    #board {
-      grid-column: 1 / 2; /* below HUD */
-      aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, var(--grass), var(--grass2));
-      border-radius: 16px;
-      padding: 14px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 1fr);
-      gap: 14px;
-      user-select: none;
-      position: relative;
-    }
-
-    .hole {
-      background: var(--hole);
-      border-radius: 14px;
-      position: relative;
-      overflow: hidden; /* hide the mole when down */
-    }
-
-    /* Mole: basic block with optional sprite; no dirt cylinder */
-    .mole {
-      position: absolute;
-      left: 10%;
-      right: 10%;
-      bottom: -72%; /* hidden below the hole */
-      height: 80%;
-      background: var(--mole);
-      border-radius: 14px 14px 0 0;
-      box-shadow: inset 0 0 0 4px rgba(0,0,0,0.15);
-      transition: bottom 160ms ease; /* simple up/down animation */
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-      color: #2b0f05;
-      background-image: var(--mole-img);
-      background-repeat: no-repeat;
-      background-position: center bottom;
-      background-size: contain;
-    }
-
-    .mole.up { bottom: 0%; }
-
-    .footer-note { opacity: 0.6; font-size: 12px; text-align: center; grid-column: 1 / -1; }
-
-    /* Right panel (Leaderboard) */
-    .sidebar {
-      grid-column: 2; /* right side */
-      grid-row: 1 / span 2; /* next to HUD & board */
-      background: var(--panel);
-      border-radius: 16px;
-      padding: 12px;
-      display: grid;
-      gap: 10px;
-      align-content: start;
-      min-height: 320px;
-    }
-    .sidebar h3 { margin: 0; font-size: 18px; }
-    #scores { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-    #scores li { background: #202a3b; padding: 8px 10px; border-radius: 8px; font-size: 13px; }
-    #clearScores { background: var(--danger); color: #fff; border: none; border-radius: 8px; padding: 8px 10px; cursor: pointer; }
-    .name-form { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
-    .name-form input { padding: 8px 10px; border-radius: 8px; border: none; background: #202a3b; color: var(--hud); }
-    .name-form button { background: var(--accent); color: #08130a; border: none; border-radius: 8px; padding: 8px 12px; font-weight: 700; cursor: pointer; }
+.leaderboard-table tr+tr td {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
