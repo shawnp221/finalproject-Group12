@@ -2,6 +2,7 @@
 
 ## What we built
 **Site Link:** https://retro-arcade-6mqx.onrender.com/
+
 This web app is a custom "Game Arcade" featuring four classic games: Minesweeper, Hangman, Whack-a-Mole, and Memory Match. The arcade provides a platform where users can select and play any of the four games provided. To navigate trough the website, first the user must login through github to access the main page. On the main page, the user is able to select any of the four games and jump straight into playing. 
 
 Each game comes with it's own unique way of keeping score and provides a global leaderboard amongst all signed in users. This leaderboard displays each player's rank, github username, the date, and any additional fields necessary for the given game. Each game runs entirely using HTML/CSS/JS for the frontend and Express/Node.js for backend. Lastly, there is a hidden Konami code secret on the login screen if the correct actions are performed. (up, up, down, down, left, right, left, right, B, A)
@@ -18,10 +19,10 @@ Each game comes with it's own unique way of keeping score and provides a global 
     - **Whack-a-Mole:** Properly implementing timing windows and hit detection that feel satisfying for the user and not unfair.
 
 ## Roles
-- **Peter Czepiel** — Minesweeper creation, quality assurance for each game
-- **Ken Sebastian** — Hangman creation, deployment
-- **Shawn Patel** — Login/auth, MongoDB setup, Memory Match creation
-- **Timothy Hutzley** — Whack-A-Mole creation, readme write-up
+- **Peter Czepiel:** Minesweeper creation, quality assurance for each game
+- **Ken Sebastian:** Hangman creation, deployment
+- **Shawn Patel:** Login/auth, MongoDB setup, Memory Match creation
+- **Timothy Hutzley:** Whack-A-Mole creation, readme write-up
 
 Using Shawn's provided MongoDB setup, each member was able to take their game and properly connect to the database using their own unique fields.
 
