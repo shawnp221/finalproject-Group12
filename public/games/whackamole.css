@@ -208,6 +208,7 @@ button:disabled {
     border-radius: 12px;
     overflow: hidden;
     font-size: 14px;
+    table-layout: auto; /* Let columns resize based on content */
 }
 
 .leaderboard-table th,

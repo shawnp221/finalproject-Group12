@@ -217,6 +217,9 @@ async function showLeaderboard() {
         // Sort by moves, then time
         scores.sort((a, b) => a.moves - b.moves || a.time - b.time);
 
+        // ✅ Only keep the top 15 scores
+        const topScores = scores.slice(0, 15);
+
         // Build leaderboard table
         let tableHTML = `
             <table class="leaderboard-table">
@@ -233,7 +236,8 @@ async function showLeaderboard() {
                 <tbody>
         `;
 
-        scores.forEach((score, index) => {
+
+        topScores.forEach((score, index) => {
             const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '';
 
             // Convert seconds to mm:ss
@@ -254,6 +258,7 @@ async function showLeaderboard() {
             const playerName = score.username === currentUser.username
                 ? `<strong>${score.username}</strong>`
                 : score.username;
+
 
             tableHTML += `
                 <tr>
