@@ -237,7 +237,9 @@ async function showLeaderboardModal() {
         <tbody>
     `;
 
-    scores.forEach((s, idx) => {
+    const topScores = scores.slice(0, 15);
+
+    topScores.forEach((s, idx) => {
       const rank = idx + 1;
       const isMe = currentUser && s.username === currentUser.username;
       const dateStr = s.date ? new Date(s.date).toLocaleDateString() : '';
