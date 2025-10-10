@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             scores.sort((a, b) => b.score - a.score);
+            scores.splice(10); // Keep only top 10
             let tableHTML = `
                 <table class="leaderboard-table">
                     <thead><tr><th>Rank</th><th>Player</th><th>Score</th><th>Date</th></tr></thead>
